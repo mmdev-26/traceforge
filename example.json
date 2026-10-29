@@ -1,0 +1,46 @@
+{
+  "spans": [
+    {
+      "id": "run",
+      "name": "Agent run",
+      "startMs": 0,
+      "endMs": 300,
+      "cost": 0
+    },
+    {
+      "id": "llm",
+      "parentId": "run",
+      "name": "Plan",
+      "startMs": 10,
+      "endMs": 110,
+      "inputTokens": 2000,
+      "outputTokens": 300,
+      "cost": 0.003
+    },
+    {
+      "id": "a",
+      "parentId": "run",
+      "name": "Inventory API",
+      "startMs": 120,
+      "endMs": 230
+    },
+    {
+      "id": "b",
+      "parentId": "run",
+      "name": "Pricing API",
+      "startMs": 130,
+      "endMs": 260,
+      "status": "error",
+      "error": "Upstream timeout"
+    }
+  ],
+  "baseline": [
+    {
+      "id": "run",
+      "name": "Agent run",
+      "startMs": 0,
+      "endMs": 200,
+      "cost": 0.002
+    }
+  ]
+}

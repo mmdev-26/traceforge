@@ -1,0 +1,126 @@
+{
+  "product": "TraceForge",
+  "version": "0.1.0",
+  "summary": {
+    "spans": 4,
+    "wallMs": 300,
+    "errors": 1,
+    "cost": 0.003,
+    "inputTokens": 2000,
+    "outputTokens": 300
+  },
+  "roots": [
+    "run"
+  ],
+  "spans": [
+    {
+      "id": "run",
+      "name": "Agent run",
+      "parentId": null,
+      "durationMs": 300,
+      "exclusiveMs": 60,
+      "status": "ok",
+      "cost": 0
+    },
+    {
+      "id": "llm",
+      "name": "Plan",
+      "parentId": "run",
+      "durationMs": 100,
+      "exclusiveMs": 100,
+      "status": "ok",
+      "cost": 0.003
+    },
+    {
+      "id": "a",
+      "name": "Inventory API",
+      "parentId": "run",
+      "durationMs": 110,
+      "exclusiveMs": 110,
+      "status": "ok",
+      "cost": 0
+    },
+    {
+      "id": "b",
+      "name": "Pricing API",
+      "parentId": "run",
+      "durationMs": 130,
+      "exclusiveMs": 130,
+      "status": "error",
+      "cost": 0
+    }
+  ],
+  "byName": {
+    "Agent run": {
+      "calls": 1,
+      "durationMs": 300,
+      "exclusiveMs": 60,
+      "errors": 0,
+      "cost": 0
+    },
+    "Plan": {
+      "calls": 1,
+      "durationMs": 100,
+      "exclusiveMs": 100,
+      "errors": 0,
+      "cost": 0.003
+    },
+    "Inventory API": {
+      "calls": 1,
+      "durationMs": 110,
+      "exclusiveMs": 110,
+      "errors": 0,
+      "cost": 0
+    },
+    "Pricing API": {
+      "calls": 1,
+      "durationMs": 130,
+      "exclusiveMs": 130,
+      "errors": 1,
+      "cost": 0
+    }
+  },
+  "findings": [
+    {
+      "severity": "error",
+      "code": "span_error",
+      "spanId": "b",
+      "detail": "Upstream timeout"
+    }
+  ],
+  "comparison": {
+    "wallMs": {
+      "before": 200,
+      "after": 300,
+      "delta": 100
+    },
+    "errors": {
+      "before": 0,
+      "after": 1,
+      "delta": 1
+    },
+    "cost": {
+      "before": 0.002,
+      "after": 0.003,
+      "delta": 0.001
+    },
+    "inputTokens": {
+      "before": 0,
+      "after": 2000,
+      "delta": 2000
+    },
+    "outputTokens": {
+      "before": 0,
+      "after": 300,
+      "delta": 300
+    }
+  },
+  "provenance": {
+    "inputSha256": "8da521e3ecff9e834a64ae6656debcfb69b6b130f4ce27db5b2e52c3f741ea74"
+  },
+  "limitations": [
+    "Analyzes recorded spans only; does not execute or replay agent tools.",
+    "Cost and tokens are additive per-span values: provide usage only on the owning span, not repeated aggregate parent totals.",
+    "Exclusive time subtracts the union of immediate-child intervals, so overlapping child work is not double-counted."
+  ]
+}

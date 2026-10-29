@@ -1,0 +1,6 @@
+[project]
+name = "traceforge"
+version = "0.1.0"
+description = "Span-tree validation, overlap-aware exclusive timings, usage attribution and paired-run comparisons."
+requires-python = ">=3.11"
+license = "MIT"
